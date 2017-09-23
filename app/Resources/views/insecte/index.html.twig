@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Insectes list</h1>
+<a href="{{ path('insecte_edit', { 'id': app.user.id }) }}">Modifier mes infos</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Age</th>
+        <th>Famille</th>
+        <th>Race</th>
+        <th>Nourriture</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for insecte in insectes %}
+        <tr>
+            <td><a href="{{ path('insecte_show', { 'id': insecte.id }) }}">{{ insecte.id }}</a></td>
+            <td>{{ insecte.username }}</td>
+            <td>{{ insecte.age }}</td>
+            <td>{{ insecte.famille }}</td>
+            <td>{{ insecte.race }}</td>
+            <td>{{ insecte.nourriture }}</td>
+
+
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('insecte_show', { 'id': insecte.id }) }}">Afficher</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('insecte_edit', { 'id': insecte.id }) }}">Modifier</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('insecte_add', { 'id': insecte.id }) }}">Ajouter</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<h1>Mes Amis</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Username</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for insecte in insectes %}
+        <tr>
+            <td>        {{ insecte }}
+            </td>
+            <td>
+                <a href="{{ path('insecte_show', { 'id': insecte.id }) }}">Afficher</a>
+                <a href="{{ path('insecte_del', { 'id': insecte.id }) }}">Supprimer</a>
+
+            </td>
+        </tr>
+    {% endfor %}
+
+
+    </tbody>
+
+    {% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Insecte</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ insecte.id }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ insecte.age }}</td>
+            </tr>
+            <tr>
+                <th>Famille</th>
+                <td>{{ insecte.famille }}</td>
+            </tr>
+            <tr>
+                <th>Race</th>
+                <td>{{ insecte.race }}</td>
+            </tr>
+            <tr>
+                <th>Nourriture</th>
+                <td>{{ insecte.nourriture }}</td>
+            </tr>
+            <tr>
+                <th>Amis</th>
+                <td>
+                    {% for rel in insecte.insectes %}
+                        {{ rel }}
+                    {% endfor %}
+
+                    {% for rel in insecte.myInsectes %}
+                        {{ rel }}
+                    {% endfor %}
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('insecte_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('insecte_edit', { 'id': insecte.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+            <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
