@@ -13,7 +13,7 @@ class InsecteType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('age')->add('famille')->add('race')->add('nourriture')->add('insectes');
+        $builder->add('age')->add('famille')->add('race')->add('nourriture');
     }
     
     /**

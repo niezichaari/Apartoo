@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<a href="{{ path('fos_user_security_logout') }}">
+    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+</a>
 <h1>Insectes list</h1>
 <a href="{{ path('insecte_edit', { 'id': app.user.id }) }}">Modifier mes infos</a>
 
@@ -32,9 +35,7 @@
                     <li>
                         <a href="{{ path('insecte_show', { 'id': insecte.id }) }}">Afficher</a>
                     </li>
-                    <li>
-                        <a href="{{ path('insecte_edit', { 'id': insecte.id }) }}">Modifier</a>
-                    </li>
+
                     <li>
                         <a href="{{ path('insecte_add', { 'id': insecte.id }) }}">Ajouter</a>
                     </li>
@@ -52,8 +53,18 @@
     </tr>
     </thead>
     <tbody>
+    {% for insecte in app.user.myInsectes %}
+        <tr>
+            <td>        {{ insecte }}
+            </td>
+            <td>
+               <a href="{{ path('insecte_show', { 'id': insecte.id }) }}">Afficher</a>
+                <a href="{{ path('insecte_del', { 'id': insecte.id }) }}">Supprimer</a>
 
-    {% for insecte in insectes %}
+            </td>
+        </tr>
+    {% endfor %}
+    {% for insecte in app.user.Insectes %}
         <tr>
             <td>        {{ insecte }}
             </td>

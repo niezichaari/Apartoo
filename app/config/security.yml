@@ -20,7 +20,8 @@ security:
                 default_target_path: /Test/insecte
 
 
-            logout:       true
+            logout:
+                target: /login
             anonymous:    true
 
     access_control:

@@ -73,13 +73,36 @@ class InsecteController extends Controller
             $em->flush();
         }
 
-
-
-
         return $this->redirectToRoute("insecte_index");
 
     }
+    /**
+     * remove friend to insect
+     *
+     * @Route("/{id}/remove", name="insecte_del")
+     * @Method({"GET", "POST"})
+     */
+    public function RemoveFriendAction(Request $request, Insecte $insecte)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user=$this->getUser();
+        if($insecte->getInsectes()->contains($this->getUser())) {
+            $insecte->getInsectes()->removeElement($this->getUser());
+            $em->merge($insecte);
+            $em->flush();
+        }
 
+        else if($user->getInsectes()->contains($insecte)){
+            $user->getInsectes()->removeElement($insecte);
+            $em->merge($user);
+            $em->flush();
+
+        }
+
+
+       return $this->redirectToRoute("insecte_index");
+
+    }
     /**
      * Finds and displays a insecte entity.
      *
