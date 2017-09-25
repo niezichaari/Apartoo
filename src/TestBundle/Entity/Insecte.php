@@ -155,8 +155,5 @@ class Insecte extends BaseUser
     }
 
 
-    public function __construct() {
-        $this->insectes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->myInsectes = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+   
 }
