@@ -155,5 +155,5 @@ class Insecte extends BaseUser
     }
 
 
-   
+
 }

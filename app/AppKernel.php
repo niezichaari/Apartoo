@@ -18,8 +18,8 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new TestBundle\TestBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-
-        );
+            new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
+         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();

@@ -5,7 +5,9 @@ namespace TestBundle\Controller;
 use TestBundle\Entity\Insecte;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Insecte controller.
@@ -27,9 +29,10 @@ class InsecteController extends Controller
         $usernamesession = $this->getUser()->getUsername();
         $insectes =$em->createQuery("SELECT c FROM TestBundle:Insecte c WHERE c.username != '$usernamesession' ")->getResult();
 
-        return $this->render('insecte/index.html.twig', array(
-            'insectes' => $insectes,
-        ));
+       return $this->render('insecte/index.html.twig', array(
+          'insectes' => $insectes,
+           ));
+
     }
 
     /**
