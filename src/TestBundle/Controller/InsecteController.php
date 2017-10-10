@@ -35,7 +35,6 @@ class InsecteController extends Controller
            ));
         */
         $em = $this->getDoctrine()->getManager();
-       // $usernamesession=$request->query->get('username');
 
         $insectes =$em->createQuery("SELECT c FROM TestBundle:Insecte c WHERE c.username != '$username' ")->getArrayResult();
 
@@ -75,20 +74,26 @@ class InsecteController extends Controller
     /**
      * add friend to insect
      *
-     * @Route("/{id}/add", name="insecte_add")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/{username}/add", name="insecte_add")
+     * @Method({"GET"})
      */
-    public function addAction(Request $request, Insecte $insecte)
+    public function addAction(Request $request, Insecte $insecte,$username)
     {
         $em = $this->getDoctrine()->getManager();
+        $insectecon = $this->getDoctrine()
+            ->getRepository('TestBundle:Insecte')
+            ->findOneBy(array('username' => $username));
 
-        if(!$insecte->getInsectes()->contains($this->getUser())){
-            $insecte->getInsectes()->add($this->getUser());
+        if(!$insecte->getInsectes()->contains($insectecon)){
+            $insecte->getInsectes()->add($insectecon);
             $em->merge($insecte);
             $em->flush();
         }
 
-        return $this->redirectToRoute("insecte_index");
+       // return $this->redirectToRoute("insecte_index");
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
 
     }
     /**
