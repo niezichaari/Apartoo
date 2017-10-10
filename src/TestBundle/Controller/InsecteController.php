@@ -19,11 +19,12 @@ class InsecteController extends Controller
     /**
      * Lists all insecte entities.
      *
-     * @Route("/", name="insecte_index")
+     * @Route("/{username}", name="insecte_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request,$username)
     {
+        /*
         $em = $this->getDoctrine()->getManager();
 
         $usernamesession = $this->getUser()->getUsername();
@@ -32,6 +33,17 @@ class InsecteController extends Controller
        return $this->render('insecte/index.html.twig', array(
           'insectes' => $insectes,
            ));
+        */
+        $em = $this->getDoctrine()->getManager();
+       // $usernamesession=$request->query->get('username');
+
+        $insectes =$em->createQuery("SELECT c FROM TestBundle:Insecte c WHERE c.username != '$username' ")->getArrayResult();
+
+        $response = new Response();
+        $response->setContent(json_encode(array('insectes' => $insectes)));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
 
     }
 
